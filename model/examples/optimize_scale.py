@@ -5,6 +5,7 @@ from scipy.optimize import minimize_scalar
 from neslab.find import distributions
 from neslab.find import Model
 
+np.seterr(divide='ignore')
 
 def objective(scale, t_chr):
     m = Model(scale, "Geometric", t_chr, n_slots=t_chr * 20000)
@@ -29,6 +30,7 @@ if __name__ == "__main__":
     nd_lat = np.empty_like(scales)
 
     for i, t_chr in enumerate(t_chrs):
+        print(i)
         scales[i], nd_lat[i] = optimize_scale(t_chr)
 
     plt.plot(t_chrs, nd_lat)
